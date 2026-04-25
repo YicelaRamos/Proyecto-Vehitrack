@@ -1,0 +1,445 @@
+/**
+ * ListaUsuarios.css - Estilos para la gestión de usuarios (solo admin)
+ *
+ * Layout de sidebar + contenido principal. Incluye tabla de usuarios
+ * con badges de rol, modal de edición con sección de seguridad,
+ * y modal de confirmación para eliminación.
+ */
+
+/* Layout principal: sidebar fijo a la izquierda, contenido a la derecha */
+.usuarios-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f7f6;
+}
+
+.usuarios-sidebar {
+    width: 260px;
+    background-color: #0a2351;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.usuarios-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.usuarios-logo-img {
+    max-width: 120px;
+    background-color: white;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.usuarios-nav {
+    flex: 1;
+}
+
+/* Cada ítem del menú lateral */
+.usuarios-nav-item {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: background-color 0.3s;
+}
+
+.usuarios-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ítem activo resaltado en color azul para que se note qué página es */
+.usuarios-nav-item.active {
+    background-color: #0d6efd;
+}
+
+.usuarios-logout-btn {
+    background-color: transparent;
+    border: 1px solid #6c757d;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+.usuarios-logout-btn:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.usuarios-main {
+    flex: 1;
+    padding: 20px 30px;
+    overflow-x: auto;
+}
+
+.usuarios-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.usuarios-title {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+}
+
+/* Badge que muestra el nombre del administrador logueado */
+.usuarios-usuario-badge {
+    background-color: #0d6efd;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+/* Tarjeta blanca que contiene la tabla */
+.usuarios-table-card {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.usuarios-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.usuarios-table th {
+    text-align: left;
+    padding: 12px 15px;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.usuarios-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+.usuarios-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Badges de rol: rojo para admin, verde para usuario normal */
+.usuarios-badge-admin {
+    background-color: #dc3545;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.usuarios-badge-user {
+    background-color: #28a745;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.usuarios-btn-editar {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s;
+}
+
+.usuarios-btn-editar:hover {
+    background-color: #0b5ed7;
+}
+
+.usuarios-empty {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+}
+
+/* MODAL DE EDICIÓN: overlay oscuro que cubre toda la pantalla */
+.usuarios-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.usuarios-modal-container {
+    background-color: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 550px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.3s ease;
+}
+
+/* Animación de entrada del modal: aparece deslizándose desde arriba */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.usuarios-modal-header {
+    background-color: #0d6efd;
+    color: white;
+    padding: 18px 24px;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.usuarios-modal-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.usuarios-modal-close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.usuarios-modal-body {
+    padding: 24px;
+}
+
+/* Fila de dos columnas (nombre y apellido) */
+.usuarios-form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.usuarios-form-col {
+    flex: 1;
+}
+
+.usuarios-form-group {
+    margin-bottom: 20px;
+}
+
+.usuarios-form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #495057;
+    font-size: 14px;
+}
+
+.usuarios-form-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.usuarios-form-input:focus {
+    outline: none;
+    border-color: #0d6efd;
+}
+
+/* Sección de seguridad (contraseña) con borde amarillo para destacar */
+.usuarios-security-section {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #ffc107;
+    margin-top: 20px;
+}
+
+.usuarios-security-title {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #856404;
+}
+
+.usuarios-modal-footer {
+    padding: 16px 24px;
+    background-color: #f8f9fa;
+    border-radius: 0 0 16px 16px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.usuarios-modal-btn-cancel {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.usuarios-modal-btn-submit {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.usuarios-modal-btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* MODAL DE CONFIRMACIÓN (eliminar) - z-index mayor para estar encima del otro modal si ambos estuvieran abiertos */
+.usuarios-confirm-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+}
+
+.usuarios-confirm-container {
+    background-color: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.usuarios-confirm-header {
+    background-color: #dc3545;
+    color: white;
+    padding: 18px 24px;
+    border-radius: 16px 16px 0 0;
+}
+
+.usuarios-confirm-body {
+    padding: 24px;
+    text-align: center;
+}
+
+.usuarios-confirm-footer {
+    padding: 16px 24px;
+    background-color: #f8f9fa;
+    border-radius: 0 0 16px 16px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.usuarios-confirm-btn-no {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.usuarios-confirm-btn-si {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 40px;
+    color: #0d6efd;
+    font-size: 18px;
+}
+
+/* Alertas de éxito/error con colores Bootstrap-like */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* RESPONSIVE: en móvil ocultamos el sidebar y la tabla se adapta
+ (aunque aquí no se usa el truco de data-label porque la tabla es sencilla
+  igual se ve bien con scroll horizontal) */
+@media (max-width: 768px) {
+    .usuarios-sidebar {
+        display: none;  
+    }
+
+    .usuarios-main {
+        padding: 15px;
+    }
+
+    .usuarios-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .usuarios-table th,
+    .usuarios-table td {
+        padding: 8px 10px;
+    }
+
+    .usuarios-form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}

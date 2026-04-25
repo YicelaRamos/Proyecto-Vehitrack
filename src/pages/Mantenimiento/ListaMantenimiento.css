@@ -1,0 +1,369 @@
+/**
+ * ListaMantenimiento.css - Estilos para el historial de mantenimientos
+ *
+ * Layout de sidebar + contenido con dos columnas: tabla de historial a la
+ * izquierda y formulario de registro rápido a la derecha. Incluye tarjetas
+ * de estadísticas con gradientes de colores y badges de estado por fila.
+ *
+ * NOTA: Los gradientes lineales se usan para darle un toque moderno y
+ * distinguir visualmente cada tarjeta de estadísticas. El color naranja
+ * (fd7e14) se usa como acento para el módulo de mantenimientos.
+ */
+
+/* Contenedor principal con flexbox para sidebar + contenido */
+.mantenimiento-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f7f6;
+}
+
+/* Sidebar estilo vehitrack (azul oscuro) */
+.mantenimiento-sidebar {
+    width: 260px;
+    background-color: #0a2351;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mantenimiento-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.mantenimiento-logo-img {
+    max-width: 120px;
+    background-color: white;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.mantenimiento-nav { flex: 1; }
+
+.mantenimiento-nav-item {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: background-color 0.3s;
+}
+
+.mantenimiento-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* El ítem activo se resalta en naranja para asociarlo al módulo de mantenimiento */
+.mantenimiento-nav-item.active {
+    background-color: #fd7e14;
+}
+
+.mantenimiento-logout-btn {
+    background-color: transparent;
+    border: 1px solid #6c757d;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+.mantenimiento-logout-btn:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.mantenimiento-main {
+    flex: 1;
+    padding: 20px 30px;
+    overflow-x: auto;
+}
+
+.mantenimiento-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.mantenimiento-title {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+}
+
+.mantenimiento-actions { display: flex; gap: 12px; }
+
+.mantenimiento-volver-btn {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.mantenimiento-volver-btn:hover { background-color: #5a6268; }
+
+/* Tarjetas de estadísticas con gradientes (efecto moderno) */
+.mantenimiento-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.mantenimiento-stat-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.mantenimiento-stat-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.mantenimiento-stat-card .stat-value {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Variantes de color para cada tarjeta (se asignan manualmente en el JSX) */
+.mantenimiento-stat-card.warning {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.mantenimiento-stat-card.success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.mantenimiento-stat-card.info {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* Layout de dos columnas: tabla (izquierda) + formulario (derecha) */
+.mantenimiento-double-column {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 25px;
+}
+
+/* Contenedor de la tabla */
+.mantenimiento-table-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.mantenimiento-table-container h5 {
+    margin: 0 0 15px 0;
+    color: #6c757d;
+    font-weight: 600;
+}
+
+.mantenimiento-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Header de la tabla en amarillo suave (coherente con el color del módulo) */
+.mantenimiento-table th {
+    text-align: left;
+    padding: 12px 15px;
+    background-color: #fff3e0;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #ffc107;
+}
+
+.mantenimiento-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+.mantenimiento-table tr:hover { background-color: #f8f9fa; }
+
+.mantenimiento-empty {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+}
+
+/* Badges de estado en la tabla */
+.badge-pendiente {
+    background-color: #ffc107;
+    color: #212529;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-realizado {
+    background-color: #28a745;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-vencido {
+    background-color: #dc3545;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Botones de acción por fila */
+.mantenimiento-btn-completar {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-right: 5px;
+    transition: background-color 0.3s;
+}
+
+.mantenimiento-btn-completar:hover { background-color: #218838; }
+
+.mantenimiento-btn-edit {
+    background-color: #ffc107;
+    color: #212529;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.mantenimiento-btn-delete {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* Formulario lateral con borde izquierdo amarillo para identificarlo */
+.mantenimiento-form-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid #ffc107;
+}
+
+.mantenimiento-form-container h5 {
+    margin: 0 0 15px 0;
+    color: #fd7e14;
+    font-weight: 600;
+}
+
+.mantenimiento-form-group { margin-bottom: 16px; }
+
+.mantenimiento-form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #495057;
+}
+
+.mantenimiento-form-input,
+.mantenimiento-form-textarea,
+.mantenimiento-form-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* Al enfocar, borde amarillo (coherente con el módulo) */
+.mantenimiento-form-input:focus,
+.mantenimiento-form-textarea:focus,
+.mantenimiento-form-select:focus {
+    outline: none;
+    border-color: #ffc107;
+}
+
+.mantenimiento-form-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.mantenimiento-form-submit {
+    width: 100%;
+    background-color: #ffc107;
+    color: #212529;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.mantenimiento-form-submit:hover { background-color: #e0a800; }
+.mantenimiento-form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Alertas de éxito/error */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 40px;
+    color: #fd7e14;
+    font-size: 18px;
+}
+
+/* Responsive: en pantallas menores a 900px, las columnas se apilan y ocultamos el sidebar */
+@media (max-width: 900px) {
+    .mantenimiento-double-column { grid-template-columns: 1fr; }
+    .mantenimiento-sidebar { display: none; }
+    .mantenimiento-main { padding: 15px; }
+    .mantenimiento-header { flex-direction: column; align-items: flex-start; }
+    .mantenimiento-table th,
+    .mantenimiento-table td { padding: 8px 10px; }
+}

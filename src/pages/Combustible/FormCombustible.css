@@ -1,0 +1,159 @@
+/**
+ * FormCombustible.css - Estilos para el modal de edición de combustible
+ *
+ * Modal centrado con overlay oscuro y header rojo, coherente con el
+ * color del módulo de combustible. Incluye animación de entrada.
+ */
+
+/* Overlay: cubre toda la pantalla y centra el modal */
+.form-combustible-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.form-combustible-container {
+    background-color: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.3s ease;
+}
+
+/* Entrada del modal: aparece deslizándose desde arriba */
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Header rojo para identificar visualmente el módulo */
+.form-combustible-header {
+    background-color: #dc3545;
+    color: white;
+    padding: 18px 24px;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-combustible-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.form-combustible-close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: opacity 0.3s;
+}
+
+.form-combustible-close-btn:hover { opacity: 0.7; }
+
+.form-combustible-body { padding: 24px; }
+
+.form-combustible-group { margin-bottom: 20px; }
+
+.form-combustible-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #495057;
+    font-size: 14px;
+}
+
+/* Asterisco rojo para campos obligatorios */
+.form-combustible-label .required {
+    color: #dc3545;
+    margin-left: 4px;
+}
+
+.form-combustible-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+/* Borde rojo al enfocar, coherente con el color del módulo */
+.form-combustible-input:focus {
+    outline: none;
+    border-color: #dc3545;
+}
+
+.form-combustible-help {
+    font-size: 11px;
+    color: #6c757d;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Footer con botones alineados a la derecha */
+.form-combustible-footer {
+    padding: 16px 24px;
+    background-color: #f8f9fa;
+    border-radius: 0 0 16px 16px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.form-combustible-btn-cancel {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.form-combustible-btn-cancel:hover { background-color: #5a6268; }
+
+.form-combustible-btn-submit {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.form-combustible-btn-submit:hover { background-color: #c82333; }
+.form-combustible-btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.form-combustible-error {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Responsive: reduce padding en móvil */
+@media (max-width: 600px) {
+    .form-combustible-body { padding: 16px; }
+    .form-combustible-header { padding: 14px 18px; }
+    .form-combustible-footer { padding: 12px 16px; }
+    .form-combustible-btn-cancel,
+    .form-combustible-btn-submit { padding: 8px 16px; }
+}

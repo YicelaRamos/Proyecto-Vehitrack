@@ -1,0 +1,235 @@
+/**
+ * Login.css - Estilos para la página de login
+ *
+ * Layout de dos paneles dentro de una tarjeta centrada:
+ * el izquierdo muestra imagen de fondo con overlay y texto descriptivo,
+ * el derecho contiene el formulario de autenticación con logo.
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Contenedor principal: ocupa toda la pantalla y centra la tarjeta con flexbox */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+    padding: 20px;
+}
+
+/* Tarjeta blanca dividida en dos paneles (izquierdo y derecho) */
+.login-card {
+    display: flex;
+    max-width: 2800px;
+    width: 200%;          /*  esto hace que la tarjeta sea el doble de ancha que su contenedor.*/
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;     /* Evita que las esquinas redondeadas se desborden */
+    min-height: 600px;
+    width: 100%;
+    min-height: 100vh;
+    align-items: center; /* centra vertical */
+}
+
+.hero-container {
+  max-width: 1200px; /* limita el ancho */
+  margin: 0 auto; /* 🔥 esto centra horizontalmente */
+  padding: 0 20px;
+}
+
+/* Panel izquierdo: la imagen se asigna desde el JSX con style, aquí solo definimos posición */
+.login-left-panel {
+    flex: 1;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+/* Capa oscura encima de la imagen para que el texto blanco sea legible */
+.login-overlay {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(7, 7, 7, 0.85);
+    z-index: 1;
+    margin-bottom: 40px;   /* Pequeño ajuste visual, no afecta al overlay porque está absolute */
+}
+
+/* Contenido del panel izquierdo (textos, features) va por encima del overlay */
+.login-content {
+    position: relative;
+    z-index: 2;
+    padding: 40px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 990px;
+    justify-content: center;
+}
+
+.login-app-title {
+    font-size: 31px;
+    letter-spacing: 6px;
+    margin-bottom: 40px;
+}
+
+.login-app-slogan {
+    font-size: 58px;
+    margin-bottom: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700; /* clave */
+    line-height: 1.2;
+}
+
+.login-description {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500; 
+    color: #b0b0b0;
+}
+
+
+.login-features {
+    margin-bottom: 60px;
+    display: flex;
+    gap:60px;
+}
+.login-feature h3 {
+    font-size: 22px;
+    margin-bottom: 30px;
+}
+.login-feature p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500; 
+    color: #b0b0b0;
+}
+
+/* Panel derecho: fondo blanco, centra el formulario verticalmente */
+.login-right-panel {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.login-form-container {
+    width: 100%;
+    max-width: 680px;
+    text-align: center;
+}
+
+.login-logo-wrapper {
+    margin-bottom: 20px;
+}
+.login-logo-img {
+    width: 215px;
+    height: auto;
+    border-radius: 15px;
+   
+}
+
+.login-form-title {
+    font-size: 24px;
+    color: #1a2b4c;
+    margin-bottom: 8px;
+}
+.login-form-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* Campos del formulario */
+.login-input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+.login-input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+    font-size: 14px;
+}
+.login-input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.login-input-group input:focus {
+    outline: none;
+    border-color: #0a2351;
+}
+
+/* Botón principal de enviar */
+.login-form-container button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #0a2351;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+.login-form-container button[type="submit"]:hover {
+    background-color: #0d2e5f;
+}
+/* Cuando está cargando (disabled) se ve más apagado y no se puede hacer clic */
+.login-form-container button[type="submit"]:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Mensaje de error en rojo */
+.login-error {
+    background-color: #fee;
+    color: #e94560;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* Botón para ir al registro (parece un enlace) */
+.login-register-link {
+    margin-top: 20px;
+}
+.login-register-link button {
+    background: none;
+    border: none;
+    color: #0a2351;
+    cursor: pointer;
+    font-weight: 500;
+}
+.login-register-link button:hover {
+    text-decoration: underline;
+}
+
+.login-footer {
+    margin-top: 40px;
+    font-size: 12px;
+    color: #999;
+}

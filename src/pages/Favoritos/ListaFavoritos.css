@@ -1,0 +1,397 @@
+/**
+ * ListaFavoritos.css - Estilos para la lista de talleres favoritos
+ *
+ * ESTRUCTURA:
+ * - Layout: sidebar + contenido principal
+ * - Grid de tarjetas con header en gradiente amarillo-naranja
+ * - Botones de acción por tarjeta (ver en mapa, eliminar)
+ * - Modal de agregar favorito
+ * - Modal de confirmación de eliminación
+ * - Responsive: grid de una columna y sidebar oculto en móvil
+ */
+
+/* Contenedor principal flex para sidebar y contenido */
+.favoritos-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f7f6;
+}
+
+/* Sidebar estilo vehitrack (azul oscuro) */
+.favoritos-sidebar {
+    width: 260px;
+    background-color: #0a2351;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.favoritos-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.favoritos-logo-img {
+    max-width: 120px;
+    background-color: white;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.favoritos-nav { flex: 1; }
+
+.favoritos-nav-item {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: background-color 0.3s;
+}
+
+.favoritos-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* El ítem activo se resalta en amarillo (coherente con el módulo) */
+.favoritos-nav-item.active {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.favoritos-logout-btn {
+    background-color: transparent;
+    border: 1px solid #6c757d;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+.favoritos-logout-btn:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.favoritos-main {
+    flex: 1;
+    padding: 20px 30px;
+    overflow-x: auto;
+}
+
+.favoritos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.favoritos-title {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+}
+
+.favoritos-agregar-btn {
+    background-color: #ffc107;
+    color: #212529;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.favoritos-agregar-btn:hover { background-color: #e0a800; }
+
+/* Grid de tarjetas adaptable */
+.favoritos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+/* Tarjeta individual con efecto hover */
+.favoritos-card {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.favoritos-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Cabecera con gradiente amarillo-naranja (marca de favoritos) */
+.favoritos-card-header {
+    background: linear-gradient(135deg, #ffc107 0%, #ff8c00 100%);
+    padding: 15px 20px;
+    color: #212529;
+}
+
+.favoritos-card-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.favoritos-card-body { padding: 20px; }
+
+.favoritos-direccion {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 15px;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.favoritos-coordenadas {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 12px;
+    color: #17a2b8;
+    background-color: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.favoritos-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.favoritos-btn-mapa {
+    flex: 1;
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.favoritos-btn-mapa:hover { background-color: #138496; }
+
+.favoritos-btn-eliminar {
+    flex: 1;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.favoritos-btn-eliminar:hover { background-color: #c82333; }
+
+/* Estado vacío: centrado y amigable */
+.favoritos-empty {
+    text-align: center;
+    padding: 60px;
+    background-color: white;
+    border-radius: 15px;
+    color: #6c757d;
+}
+
+/* Modal para agregar favorito */
+.favoritos-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.favoritos-modal-container {
+    background-color: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.3s ease;
+}
+
+/* Animación de entrada del modal */
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.favoritos-modal-header {
+    background-color: #ffc107;
+    color: #212529;
+    padding: 18px 24px;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.favoritos-modal-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.favoritos-modal-close-btn {
+    background: none;
+    border: none;
+    color: #212529;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.favoritos-modal-body { padding: 24px; }
+
+.favoritos-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.favoritos-modal-footer {
+    padding: 16px 24px;
+    background-color: #f8f9fa;
+    border-radius: 0 0 16px 16px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.favoritos-modal-btn-cancel {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.favoritos-modal-btn-submit {
+    background-color: #ffc107;
+    color: #212529;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Modal de confirmación de eliminación (z-index mayor para estar sobre el otro modal) */
+.favoritos-confirm-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+}
+
+.favoritos-confirm-container {
+    background-color: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.favoritos-confirm-header {
+    background-color: #dc3545;
+    color: white;
+    padding: 18px 24px;
+    border-radius: 16px 16px 0 0;
+}
+
+.favoritos-confirm-body {
+    padding: 24px;
+    text-align: center;
+}
+
+.favoritos-confirm-footer {
+    padding: 16px 24px;
+    background-color: #f8f9fa;
+    border-radius: 0 0 16px 16px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.favoritos-confirm-btn-no {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.favoritos-confirm-btn-si {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 40px;
+    color: #ffc107;
+    font-size: 18px;
+}
+
+/* Alertas estándar */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* RESPONSIVE: en móvil ocultamos sidebar y las tarjetas pasan a una columna */
+@media (max-width: 768px) {
+    .favoritos-sidebar { display: none; }
+    .favoritos-main { padding: 15px; }
+    .favoritos-header { flex-direction: column; align-items: flex-start; }
+    .favoritos-grid { grid-template-columns: 1fr; }
+}

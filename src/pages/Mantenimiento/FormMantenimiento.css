@@ -1,0 +1,174 @@
+/**
+ * FormMantenimiento.css - Estilos para el modal de edición de mantenimiento
+ *
+ * Modal centrado con overlay oscuro y header amarillo, coherente con el
+ * color del módulo de mantenimientos. Incluye animación de entrada.
+ * 
+ * NOTA: Se usa en FormMantenimiento.jsx. Los estilos son específicos para
+ * la edición, no para el formulario inline de creación (que está en ListaMantenimiento).
+ */
+
+/* Overlay que cubre toda la pantalla y centra el modal */
+.form-mantenimiento-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.form-mantenimiento-container {
+    background-color: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 550px;
+    max-height: 90vh;
+    overflow-y: auto;        /* Permite scroll interno si el contenido es muy largo */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.3s ease;
+}
+
+/* Animación de entrada: aparece deslizándose desde arriba */
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Header amarillo para identificar visualmente que es el módulo de mantenimientos */
+.form-mantenimiento-header {
+    background-color: #ffc107;   /* Amarillo corporativo del módulo */
+    color: #212529;
+    padding: 18px 24px;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-mantenimiento-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.form-mantenimiento-close-btn {
+    background: none;
+    border: none;
+    color: #212529;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: opacity 0.3s;
+}
+
+.form-mantenimiento-close-btn:hover { opacity: 0.7; }
+
+.form-mantenimiento-body { padding: 24px; }
+
+.form-mantenimiento-group { margin-bottom: 20px; }
+
+.form-mantenimiento-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #495057;
+    font-size: 14px;
+}
+
+/* Asterisco rojo para campos obligatorios (feedback visual claro) */
+.form-mantenimiento-label .required {
+    color: #dc3545;
+    margin-left: 4px;
+}
+
+/* Estilos comunes para inputs, textarea y select */
+.form-mantenimiento-input,
+.form-mantenimiento-textarea,
+.form-mantenimiento-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+/* Al enfocar, borde amarillo (coherente con el color del módulo) */
+.form-mantenimiento-input:focus,
+.form-mantenimiento-textarea:focus,
+.form-mantenimiento-select:focus {
+    outline: none;
+    border-color: #ffc107;
+}
+
+.form-mantenimiento-textarea {
+    resize: vertical;        /* Permite redimensionar solo verticalmente para mejor UX */
+    min-height: 80px;
+}
+
+/* Texto de ayuda pequeño y discreto */
+.form-mantenimiento-help {
+    font-size: 11px;
+    color: #6c757d;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Footer con botones alineados a la derecha (estándar en modales) */
+.form-mantenimiento-footer {
+    padding: 16px 24px;
+    background-color: #f8f9fa;
+    border-radius: 0 0 16px 16px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.form-mantenimiento-btn-cancel {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.form-mantenimiento-btn-cancel:hover { background-color: #5a6268; }
+
+/* Botón principal en amarillo (mismo color que el header) */
+.form-mantenimiento-btn-submit {
+    background-color: #ffc107;
+    color: #212529;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.form-mantenimiento-btn-submit:hover { background-color: #e0a800; }
+.form-mantenimiento-btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.form-mantenimiento-error {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Responsive: en móvil reducimos padding para aprovechar mejor el espacio */
+@media (max-width: 600px) {
+    .form-mantenimiento-body { padding: 16px; }
+    .form-mantenimiento-header { padding: 14px 18px; }
+    .form-mantenimiento-footer { padding: 12px 16px; }
+    .form-mantenimiento-btn-cancel,
+    .form-mantenimiento-btn-submit { padding: 8px 16px; }
+}

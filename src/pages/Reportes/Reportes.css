@@ -1,0 +1,240 @@
+/**
+ * Reportes.css - Estilos para los tres componentes de reportes (Combustible, Mantenimiento, General)
+ *
+ * ESTRUCTURA:
+ * - Layout: sidebar + contenido principal
+ * - Selector de vehículo
+ * - Tarjetas de estadísticas
+ * - Tabla de registros
+ * - Botones de exportación PDF y CSV
+ * - Alertas de éxito y error
+ * - Responsive: apila botones y oculta sidebar en móvil
+ */
+
+/* Layout general: sidebar fijo izquierdo, contenido derecho */
+.reportes-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f7f6;
+}
+
+.reportes-sidebar {
+    width: 260px;
+    background-color: #0a2351;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.reportes-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.reportes-logo-img {
+    max-width: 120px;
+    background-color: white;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.reportes-nav {
+    flex: 1;
+}
+
+.reportes-nav-item {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: background-color 0.3s;
+}
+
+.reportes-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* El ítem activo se resalta en rojo porque es la sección de reportes (color distintivo) */
+.reportes-nav-item.active {
+    background-color: #dc3545;
+}
+
+.reportes-logout-btn {
+    background-color: transparent;
+    border: 1px solid #6c757d;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+.reportes-logout-btn:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.reportes-main {
+    flex: 1;
+    padding: 20px 30px;
+    overflow-x: auto;
+}
+
+.reportes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.reportes-title {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+}
+
+/* Selector de vehículo (combustible y mantenimiento) */
+.reportes-selector {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.reportes-selector label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.reportes-selector select {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Tarjetas de estadísticas (resumen numérico) */
+.reportes-stats-card {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Contenedor de la tabla */
+.reportes-table-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+}
+
+.reportes-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reportes-table-container th {
+    text-align: left;
+    padding: 12px 15px;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.reportes-table-container td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Botones de exportación (PDF rojo, CSV verde) alineados a la derecha */
+.reportes-buttons-container {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    justify-content: flex-end;
+}
+
+.reportes-btn-pdf {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.reportes-btn-pdf:hover { background-color: #c82333; }
+
+.reportes-btn-csv {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.reportes-btn-csv:hover { background-color: #218838; }
+
+.reportes-empty {
+    text-align: center;
+    padding: 40px;
+    background-color: white;
+    border-radius: 15px;
+    color: #6c757d;
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 40px;
+    color: #dc3545;
+    font-size: 18px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Responsive: en móvil ocultamos sidebar, apilamos botones y ajustamos padding */
+@media (max-width: 768px) {
+    .reportes-sidebar { display: none; }
+    .reportes-main { padding: 15px; }
+    .reportes-header { flex-direction: column; align-items: flex-start; }
+    .reportes-buttons-container { flex-direction: column; }
+    .reportes-btn-pdf, .reportes-btn-csv { width: 100%; }
+}

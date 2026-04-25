@@ -1,0 +1,385 @@
+/**
+ * Notificaciones.css - Estilos para el centro de alertas
+ *
+ * ESTRUCTURA:
+ * - Layout: sidebar + contenido principal
+ * - Tarjetas de documentos con badge de estado (VENCIDO/PRÓXIMO)
+ * - Animación pulse para alertas críticas
+ * - Tarjetas de mantenimiento con borde lateral
+ * - Modal de renovación de documento
+ * - Responsive: grid de una columna y sidebar oculto en móvil
+ */
+
+.notificaciones-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f7f6;
+}
+
+/* Sidebar consistente con el resto de la app */
+.notificaciones-sidebar {
+    width: 260px;
+    background-color: #0a2351;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.notificaciones-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.notificaciones-logo-img {
+    max-width: 120px;
+    background-color: white;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.notificaciones-nav { flex: 1; }
+
+.notificaciones-nav-item {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: background-color 0.3s;
+}
+
+.notificaciones-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ítem activo resaltado en rojo (coherente con alertas de documentos) */
+.notificaciones-nav-item.active {
+    background-color: #dc3545;
+}
+
+.notificaciones-logout-btn {
+    background-color: transparent;
+    border: 1px solid #6c757d;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+.notificaciones-logout-btn:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.notificaciones-main {
+    flex: 1;
+    padding: 20px 30px;
+    overflow-x: auto;
+}
+
+.notificaciones-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.notificaciones-title {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+}
+
+/* Mensaje cuando no hay alertas (todo en orden) */
+.notificaciones-success-card {
+    background-color: #d4edda;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.notificaciones-section-title {
+    margin: 20px 0 15px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.notificaciones-section-title.danger { color: #dc3545; }
+.notificaciones-section-title.primary { color: #007bff; }
+
+/* Grid de tarjetas adaptable */
+.notificaciones-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Tarjeta de documento (SOAT/RTM) */
+.notificaciones-card-documento {
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+    overflow: hidden;
+}
+
+.notificaciones-card-documento:hover {
+    transform: translateY(-3px);
+}
+
+.notificaciones-card-header {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Badge rojo con animación de pulso para documentos vencidos */
+.notificaciones-badge-vencido {
+    background-color: #dc3545;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    animation: pulse 2s infinite; /* ¡Esta es la clave que no se puede hacer inline fácilmente! */
+}
+
+/* Badge amarillo para próximos a vencer */
+.notificaciones-badge-proximo {
+    background-color: #ffc107;
+    color: #212529;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Animación que hace parpadear suavemente el badge rojo para llamar la atención */
+@keyframes pulse {
+    0%   { opacity: 1; }
+    50%  { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.notificaciones-card-body { padding: 15px; }
+
+.notificaciones-fecha-box {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.notificaciones-fecha-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #6c757d;
+    display: block;
+}
+
+.notificaciones-fecha-value {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.notificaciones-fecha-value.danger { color: #dc3545; }
+
+/* Botón de renovar (dos variantes: peligro y advertencia) */
+.notificaciones-btn-renovar {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.notificaciones-btn-renovar.danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.notificaciones-btn-renovar.danger:hover { background-color: #c82333; }
+
+.notificaciones-btn-renovar.warning {
+    background-color: transparent;
+    color: #ffc107;
+    border: 2px solid #ffc107;
+}
+
+.notificaciones-btn-renovar.warning:hover {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+/* Tarjeta de mantenimiento con borde lateral azul para diferenciar visualmente */
+.notificaciones-card-mantenimiento {
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+    border-left: 4px solid #17a2b8;
+}
+
+.notificaciones-card-mantenimiento:hover { transform: translateY(-3px); }
+
+.notificaciones-mant-header {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.notificaciones-placa {
+    font-weight: bold;
+    color: #17a2b8;
+}
+
+.notificaciones-badge-pendiente {
+    background-color: #17a2b8;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.notificaciones-btn-gestionar {
+    width: 100%;
+    background-color: transparent;
+    border: 2px solid #17a2b8;
+    color: #17a2b8;
+    padding: 8px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s;
+}
+
+.notificaciones-btn-gestionar:hover {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.notificaciones-empty {
+    text-align: center;
+    padding: 40px;
+    background-color: white;
+    border-radius: 15px;
+    color: #6c757d;
+}
+
+/* Modal de renovación (estilo consistente con otros modales de la app) */
+.notificaciones-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.notificaciones-modal-container {
+    background-color: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 450px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.3s ease;
+}
+
+/* Animación de entrada del modal */
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.notificaciones-modal-header {
+    background-color: #0a2351;
+    color: white;
+    padding: 18px 24px;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notificaciones-modal-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.notificaciones-modal-close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.notificaciones-modal-body { padding: 24px; }
+
+.notificaciones-modal-footer {
+    padding: 16px 24px;
+    background-color: #f8f9fa;
+    border-radius: 0 0 16px 16px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.notificaciones-modal-btn-cancel {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.notificaciones-modal-btn-submit {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 40px;
+    color: #dc3545;
+    font-size: 18px;
+}
+
+/* RESPONSIVE: en móvil ocultamos sidebar y el grid se convierte en una sola columna */
+@media (max-width: 768px) {
+    .notificaciones-sidebar { display: none; }
+    .notificaciones-main { padding: 15px; }
+    .notificaciones-header { flex-direction: column; align-items: flex-start; }
+    .notificaciones-grid { grid-template-columns: 1fr; }
+}

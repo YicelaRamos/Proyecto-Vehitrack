@@ -1,0 +1,91 @@
+/**
+ * SeleccionarVehiculo.css - Estilos para la pantalla de selección de vehículo
+ *
+ * Muestra una cuadrícula de tarjetas con los vehículos del usuario.
+ * Cada tarjeta es clickable y redirige al formulario de combustible o mantenimiento.
+ * Incluye estado vacío con botón para agregar vehículo.
+ */
+
+/* Contenedor principal, centrado y con ancho máximo */
+.seleccionar-vehiculo-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.seleccionar-vehiculo-container h2 {
+    margin-bottom: 24px;
+    color: #333;
+}
+
+/* Grid de tarjetas adaptable (se ajusta automáticamente) */
+.lista-vehiculos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Tarjeta de vehículo: parece un botón grande */
+.vehiculo-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Efecto al pasar el mouse: sube un poco y aumenta sombra */
+.vehiculo-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.vehiculo-card h3 {
+    margin: 0 0 8px 0;
+    color: #2c3e50;
+}
+
+.vehiculo-card p {
+    margin: 6px 0;
+    color: #666;
+}
+
+/* Mensaje de error cuando no hay vehículos */
+.alert-error {
+    background-color: #fee2e2;
+    border-left: 4px solid #dc2626;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.alert-error p {
+    margin: 10px 0;
+    color: #991b1b;
+}
+
+/* Botón para agregar vehículo desde el estado vacío */
+.btn-agregar-vehiculo {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background-color 0.2s;
+}
+
+.btn-agregar-vehiculo:hover {
+    background-color: #2563eb;
+}
+
+/* Indicador de carga */
+.cargando {
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: #666;
+}

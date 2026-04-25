@@ -1,0 +1,322 @@
+/**
+ * ListaCombustible.css - Estilos para el historial de combustible
+ *
+ * Layout de sidebar + contenido con dos columnas: tabla de historial a la
+ * izquierda y formulario de registro rápido a la derecha. Incluye tarjetas
+ * de estadísticas con gradientes y badge de eficiencia por registro.
+ * 
+ * El color predominante es rojo (#dc3545) para identificar el módulo de combustible,
+ * a diferencia del amarillo (mantenimiento) y verde (favoritos).
+ */
+
+/* Contenedor principal flex para sidebar y contenido */
+.combustible-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f7f6;
+}
+
+/* Sidebar estilo vehitrack (azul oscuro) */
+.combustible-sidebar {
+    width: 260px;
+    background-color: #0a2351;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.combustible-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.combustible-logo-img {
+    max-width: 120px;
+    background-color: white;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.combustible-nav { flex: 1; }
+
+.combustible-nav-item {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: background-color 0.3s;
+}
+
+.combustible-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ítem activo resaltado en rojo (color del módulo de combustible) */
+.combustible-nav-item.active {
+    background-color: #e94560;
+}
+
+.combustible-logout-btn {
+    background-color: transparent;
+    border: 1px solid #6c757d;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+.combustible-logout-btn:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.combustible-main {
+    flex: 1;
+    padding: 20px 30px;
+    overflow-x: auto;
+}
+
+.combustible-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.combustible-title {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+}
+
+.combustible-actions { display: flex; gap: 12px; }
+
+.combustible-volver-btn {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.combustible-volver-btn:hover { background-color: #5a6268; }
+
+/* Tarjetas de estadísticas con gradientes (cada una con su color) */
+.combustible-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.combustible-stat-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.combustible-stat-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.combustible-stat-card .stat-value {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Variante verde para galones */
+.combustible-stat-card.verde {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+/* Variante naranja/rosado para eficiencia */
+.combustible-stat-card.naranja {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+/* Layout de dos columnas: tabla + formulario inline */
+.combustible-double-column {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 25px;
+}
+
+/* Contenedor de la tabla */
+.combustible-table-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.combustible-table-container h5 {
+    margin: 0 0 15px 0;
+    color: #6c757d;
+    font-weight: 600;
+}
+
+.combustible-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.combustible-table th {
+    text-align: left;
+    padding: 12px 15px;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.combustible-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+.combustible-table tr:hover { background-color: #f8f9fa; }
+
+.combustible-empty {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+}
+
+/* Formulario lateral con borde izquierdo rojo (identifica módulo de combustible) */
+.combustible-form-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid #dc3545;
+}
+
+.combustible-form-container h5 {
+    margin: 0 0 15px 0;
+    color: #dc3545;
+    font-weight: 600;
+}
+
+.combustible-form-group { margin-bottom: 16px; }
+
+.combustible-form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #495057;
+}
+
+.combustible-form-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* Al enfocar, borde rojo (coherente con el color del módulo) */
+.combustible-form-input:focus {
+    outline: none;
+    border-color: #dc3545;
+}
+
+.combustible-form-submit {
+    width: 100%;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.combustible-form-submit:hover { background-color: #c82333; }
+.combustible-form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Botones de acción en la tabla */
+.combustible-btn-edit {
+    background-color: #ffc107;
+    color: #212529;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.combustible-btn-delete {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* Badge de eficiencia en verde para destacar valores positivos */
+.badge-eficiencia {
+    background-color: #28a745;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 40px;
+    color: #e94560;
+    font-size: 18px;
+}
+
+/* Alertas de éxito y error */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* RESPONSIVE: en pantallas menores a 900px, columnas se apilan y sidebar se oculta */
+@media (max-width: 900px) {
+    .combustible-double-column { grid-template-columns: 1fr; }
+    .combustible-sidebar { display: none; }
+    .combustible-main { padding: 15px; }
+    .combustible-header { flex-direction: column; align-items: flex-start; }
+    .combustible-table th,
+    .combustible-table td { padding: 8px 10px; }
+}

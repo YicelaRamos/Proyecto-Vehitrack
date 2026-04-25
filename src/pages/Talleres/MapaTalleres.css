@@ -1,0 +1,432 @@
+/**
+ * MapaTalleres.css - Estilos para el mapa y directorio de talleres
+ *
+ * ESTRUCTURA:
+ * - Layout: sidebar + contenido principal
+ * - Filtros de búsqueda
+ * - Panel de mapa (Leaflet) + panel de directorio en paralelo
+ * - Tarjetas de taller con estado selected
+ * - Modal de detalles del taller
+ * - Responsive: apila mapa y directorio verticalmente en móvil
+ */
+
+/* Contenedor principal con sidebar y contenido */
+.mapa-talleres-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f7f6;
+}
+
+/* Menú lateral estilo vehitrack (fondo azul oscuro) */
+.mapa-talleres-sidebar {
+    width: 260px;
+    background-color: #0a2351;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mapa-talleres-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.mapa-talleres-logo-img {
+    max-width: 120px;
+    background-color: white;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.mapa-talleres-nav {
+    flex: 1;
+}
+
+/* Ítems del menú lateral */
+.mapa-talleres-nav-item {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: background-color 0.3s;
+}
+
+.mapa-talleres-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* El ítem activo se resalta en verde porque el mapa se asocia con talleres (color corporativo de talleres) */
+.mapa-talleres-nav-item.active {
+    background-color: #28a745;
+}
+
+.mapa-talleres-logout-btn {
+    background-color: transparent;
+    border: 1px solid #6c757d;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+.mapa-talleres-logout-btn:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Contenido principal: columnas flexibles */
+.mapa-talleres-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Cabecera con título y badge */
+.mapa-talleres-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: white;
+    border-bottom: 2px solid #e0e0e0;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.mapa-talleres-title {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+}
+
+/* Filtros: contenedor flexible */
+.mapa-talleres-filtros {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.mapa-talleres-filtro-select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.mapa-talleres-filtro-select:focus {
+    outline: none;
+    border-color: #28a745;
+}
+
+.mapa-talleres-filtro-input {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    width: 200px;
+}
+
+.mapa-talleres-filtro-input:focus {
+    outline: none;
+    border-color: #28a745;
+}
+
+.mapa-talleres-filtro-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.mapa-talleres-filtro-btn:hover {
+    background-color: #218838;
+}
+
+.mapa-talleres-filtro-btn-limpiar {
+    background-color: #6c757d;
+}
+
+.mapa-talleres-filtro-btn-limpiar:hover {
+    background-color: #5a6268;
+}
+
+/* Layout mapa + directorio en paralelo (dos columnas) */
+.mapa-talleres-content {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+.mapa-talleres-mapa-panel {
+    flex: 2;
+    background-color: #e9ecef;
+    position: relative;
+}
+
+.mapa-talleres-mapa {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+}
+
+.mapa-talleres-loading-mapa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 500px;
+    background-color: #f8f9fa;
+    color: #6c757d;
+    font-size: 16px;
+}
+
+.mapa-talleres-directorio-panel {
+    flex: 1;
+    background-color: white;
+    border-left: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.mapa-talleres-directorio-header {
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.mapa-talleres-directorio-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.mapa-talleres-directorio-header p {
+    margin: 5px 0 0;
+    font-size: 13px;
+    color: #6c757d;
+}
+
+/* Listado de talleres con scroll vertical */
+.mapa-talleres-lista {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.mapa-talleres-tarjeta {
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.mapa-talleres-tarjeta:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Tarjeta seleccionada: borde verde más grueso y fondo muy claro */
+.mapa-talleres-tarjeta.selected {
+    border: 2px solid #28a745;
+    background-color: #f0fff4;
+}
+
+.mapa-talleres-tarjeta-nombre {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Estrellas de calificación */
+.mapa-talleres-estrella {
+    color: #ffc107;
+    font-size: 14px;
+}
+
+.mapa-talleres-tarjeta-direccion {
+    font-size: 13px;
+    color: #6c757d;
+    margin: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.mapa-talleres-tarjeta-servicios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.mapa-talleres-servicio-tag {
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 3px 8px;
+    border-radius: 15px;
+    font-size: 11px;
+}
+
+.mapa-talleres-tarjeta-telefono {
+    font-size: 12px;
+    color: #28a745;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Modal de detalles: overlay y contenedor */
+.mapa-talleres-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.mapa-talleres-modal-container {
+    background-color: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.3s ease;
+}
+
+/* Animación de entrada del modal */
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.mapa-talleres-modal-header {
+    background-color: #28a745;
+    color: white;
+    padding: 18px 24px;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mapa-talleres-modal-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.mapa-talleres-modal-close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: opacity 0.3s;
+}
+
+.mapa-talleres-modal-close-btn:hover {
+    opacity: 0.7;
+}
+
+.mapa-talleres-modal-body {
+    padding: 24px;
+}
+
+.mapa-talleres-modal-info {
+    margin-bottom: 16px;
+}
+
+.mapa-talleres-modal-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.mapa-talleres-modal-value {
+    color: #333;
+    font-size: 14px;
+}
+
+.mapa-talleres-modal-servicios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.mapa-talleres-modal-footer {
+    padding: 16px 24px;
+    background-color: #f8f9fa;
+    border-radius: 0 0 16px 16px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.mapa-talleres-modal-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.mapa-talleres-modal-btn:hover {
+    background-color: #218838;
+}
+
+.mapa-talleres-vacio {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 40px;
+    color: #28a745;
+    font-size: 18px;
+}
+
+/* RESPONSIVE: en pantallas menores a 900px, el sidebar se oculta y los paneles se apilan verticalmente */
+@media (max-width: 900px) {
+    .mapa-talleres-sidebar { display: none; }
+    .mapa-talleres-content { flex-direction: column; }
+    .mapa-talleres-mapa-panel { min-height: 400px; }
+    .mapa-talleres-mapa { min-height: 400px; }
+    .mapa-talleres-directorio-panel { max-height: 400px; }
+    .mapa-talleres-header { flex-direction: column; align-items: flex-start; }
+    .mapa-talleres-filtros { width: 100%; }
+    .mapa-talleres-filtro-input { flex: 1; }
+}

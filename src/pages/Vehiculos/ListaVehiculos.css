@@ -1,0 +1,280 @@
+/**
+ * ListaVehiculos.css - Estilos para el listado de vehículos
+ *
+ * ESTRUCTURA:
+ * - Layout: sidebar + contenido principal
+ * - Tabla de vehículos con hover
+ * - Botones de acción por fila
+ * - Badges para placa, SOAT y RTM
+ * - Responsive: oculta sidebar y convierte tabla en tarjetas en móvil
+ */
+
+/* Layout principal: sidebar fijo a la izquierda, contenido a la derecha */
+.lista-vehiculos-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f7f6;
+}
+
+.lista-vehiculos-sidebar {
+    width: 260px;
+    background-color: #0a2351;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.lista-vehiculos-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.lista-vehiculos-logo-img {
+    max-width: 120px;
+    background-color: white;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.lista-vehiculos-nav {
+    flex: 1;
+}
+
+.lista-vehiculos-nav-item {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: background-color 0.3s;
+}
+
+.lista-vehiculos-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ítem activo resaltado en rojo para que se note qué página estamos */
+.lista-vehiculos-nav-item.active {
+    background-color: #e94560;
+}
+
+.lista-vehiculos-logout-btn {
+    background-color: transparent;
+    border: 1px solid #6c757d;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+.lista-vehiculos-logout-btn:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.lista-vehiculos-main {
+    flex: 1;
+    padding: 20px 30px;
+    overflow-x: auto;  /* Permite scroll horizontal si la tabla es muy ancha */
+}
+
+.lista-vehiculos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.lista-vehiculos-title {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+}
+
+.lista-vehiculos-add-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.lista-vehiculos-add-btn:hover {
+    background-color: #218838;
+}
+
+/* Contenedor de la tabla con sombra y bordes redondeados para que se vea más moderna */
+.lista-vehiculos-table-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+}
+
+.lista-vehiculos-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lista-vehiculos-table th {
+    text-align: left;
+    padding: 12px 15px;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.lista-vehiculos-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+.lista-vehiculos-table tr:hover {
+    background-color: #f8f9fa;  /* Resalta la fila al pasar el mouse */
+}
+
+/* Botones de acción por fila - cada uno con su colorcito */
+.btn-mantenimiento {
+    background-color: #ffc107;
+    color: #212529;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-right: 5px;
+    transition: all 0.3s;
+}
+
+.btn-mantenimiento:hover {
+    background-color: #e0a800;
+}
+
+.btn-combustible {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-right: 5px;
+    transition: all 0.3s;
+}
+
+.btn-combustible:hover {
+    background-color: #c82333;
+}
+
+.btn-eliminar {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s;
+}
+
+.btn-eliminar:hover {
+    background-color: #5a6268;
+}
+
+/* Badges de colores para identificar documentos del vehículo de un vistazo */
+.badge-soat {
+    background-color: #17a2b8;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.badge-rtm {
+    background-color: #fd7e14;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.badge-placa {
+    background-color: #e94560;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.lista-vehiculos-empty {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 40px;
+    color: #e94560;
+    font-size: 18px;
+}
+
+/* Responsive: en pantallas pequeñas ocultamos el sidebar y convertimos la tabla en tarjetas apiladas */
+@media (max-width: 768px) {
+    .lista-vehiculos-sidebar {
+        display: none;  /* Ocultamos el menú lateral,*/
+    }
+
+    .lista-vehiculos-main {
+        padding: 15px;
+    }
+
+    .lista-vehiculos-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    /* Ocultamos el encabezado de la tabla */
+    .lista-vehiculos-table thead {
+        display: none;
+    }
+
+    /* Cada fila se comporta como una tarjeta independiente */
+    .lista-vehiculos-table tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .lista-vehiculos-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: none;
+        padding: 8px 10px;
+    }
+
+    /* Mostramos el nombre de la columna antes del valor usando el atributo data-label */
+    .lista-vehiculos-table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        width: 40%;
+    }
+}
