@@ -6,11 +6,10 @@ Tecnologías utilizadas
 HTML5
 CSS3
 JavaScript
-Python (si aplica)
 MySQL
 Git
-GitHub
-Funcionalidades
+GitHub.
+Funcionalidades:
 Registro de vehículos.
 Consulta de información.
 Actualización de registros.
